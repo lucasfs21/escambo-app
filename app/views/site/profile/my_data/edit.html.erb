@@ -1,0 +1,40 @@
+<%= content_for :javasscripts do %>
+    <%= javascript_include_tag 'site/profile/ads' %>
+<% end %>
+
+<h1> Meus Dados </h1>
+<br>
+<% if @profile_member.errors.any? %>
+  <%= render partial: "layouts/shared_partials/error_notice", locals: {errors_messages: @profile_member.errors.full_messages} %>
+<% end %>
+
+
+<%= form_for(@profile_member, url: site_profile_my_datum_path(@profile_member)) do |f| %>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <div class="form-group">
+          <%= f.label :first_name %>
+          <%= f.text_field :first_name, class: "form-control", placeholder: "Primeiro Nome" %>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group col-xs-6">
+        <div class="form-group">
+          <%= f.label :second_name %>
+          <%= f.text_field :second_name, class: "form-control", placeholder: "Segundo Nome" %>
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="form-group col-xs-3">
+        <div class="form-group">
+          <%= f.label :birthdate %>
+          <%= f.text_field :birthdate, class: "form-control datepicker", value: (l(@profile_member.birthdate) unless @profile_member.birthdate.blank?) %>
+        </div>
+      </div>
+    </div>
+
+    <%= submit_tag "Enviar", class: "btn btn-default" %>
+<% end %>

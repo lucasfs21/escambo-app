@@ -1,0 +1,70 @@
+<% page_title = "Administradores" %>
+<%= render partial: "layouts/backoffice_shared/page_title", locals: {page_title: page_title} %>
+        <div class="row">
+          <div class="col-lg-10">
+                  <div class="panel panel-default">
+                      <div class="panel-heading">
+                          Administradores
+                          <% if policy(@admins).new? %>
+                              <%= link_to new_backoffice_admin_path, type: "button",
+                                  class:"btn btn-success btn-circle pull-right", style: "margin-top: -5px" do %>
+                                <i class="fa fa-plus"></i>
+                              <% end %>
+                          <% end %>
+                      </div>
+                      <!-- /.panel-heading -->
+                      <div class="panel-body">
+                          <div class="table-responsive">
+                              <table class="table table-striped table-bordered table-hover">
+                                  <thead>
+                                      <tr>
+                                          <th>#</th>
+                                          <th>Nome</th>
+                                          <th>E-mail</th>
+                                          <th>Tipo de Acesso</th>
+                                          <th>Ações</th>
+                                      </tr>
+                                  </thead>
+                                  <tbody>
+                                      <% @admins.each do |admin| %>
+                                      <tr>
+                                          <td><%= admin.id %></td>
+                                          <td><%= admin.name %></td>
+                                          <td><%= admin.email %></td>
+                                          <td><%= admin.role_i18n %></td>
+                                          <td>
+                                            <%= link_to new_backoffice_send_mail_path(id: admin.id), class: "btn btn-info btn-circle", remote: "true",
+                                                type: "button" do %>
+                                                <i class="fa fa-envelope"></i>
+                                            <% end %>
+                                            <%= link_to edit_backoffice_admin_path(admin.id), class: "btn btn-primary btn-circle",
+                                            	  type: "button" do %>
+                                                <i class="fa fa-edit"></i>
+                                            <% end %>
+                                            <% if current_admin.id != admin.id && policy(@admins).destroy? %>
+                                                <%= link_to backoffice_admin_path(admin.id), class: "btn btn-danger btn-circle",
+                                                	  type: "button", method: :delete, data: {confirm: t('messages.confirm_with', item: admin.name)} do %>
+                                                    <i class="fa fa-minus"></i>
+                                                <% end %>
+                                            <% else %>
+                                                <%= link_to '#', class: "btn btn-danger btn-circle",
+                                                    type: "button", disabled: "true"  do %>
+                                                    <i class="fa fa-minus"></i>
+                                                <% end %>
+                                            <% end %>
+                                          </td>
+                                      </tr>
+                                      <% end %>
+                                  </tbody>
+                              </table>
+                          </div>
+                          <!-- /.table-responsive -->
+                      </div>
+                      <!-- /.panel-body -->
+                  </div>
+                  <!-- /.panel -->
+              </div>
+              <!-- /.col-lg-6 -->
+        </div>
+        <!-- /.row -->
+        <%= render partial: 'layouts/backoffice_shared/send_mail_modal' %>

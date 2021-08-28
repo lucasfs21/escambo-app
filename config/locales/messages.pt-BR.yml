@@ -1,0 +1,3 @@
+'pt-BR':
+  messages:
+    confirm_with: Você realmente deseja excluir <b>%{item}</b>?

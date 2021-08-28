@@ -1,0 +1,16 @@
+//alert('<%= @admin.email %>');
+$(function(){
+  let $sendMailModal = $('#sendMailModal');
+
+  // Setting email and name on form
+  $('#recipient-name').val('<%= @admin.email %>');
+  $('h5.modal-title').text('Enviar mensagem para <%= @admin.name %>');
+
+  // Shows modal
+  $sendMailModal.modal();
+
+  // Set focus on 'Message Text' after modal is shown
+  $sendMailModal.on('shown.bs.modal', function () {
+    $('#subject-text').focus();
+  })
+});

@@ -1,0 +1,29 @@
+<div class="row">
+    <div class="col-lg-6">
+        <% if @category.errors.any? %>
+          <%= render partial: "layouts/shared_partials/error_notice", locals: {errors_messages: @category.errors.full_messages} %>
+        <% end %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <%= form_title %>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                          <%= form_for([:backoffice, @category])  do |f| %>
+                              <div class="form-group">
+                                  <label>Descrição</label>
+                                  <%= f.text_field :description, class: "form-control", autofocus: "true" %>
+                              </div>
+                              <%= f.submit "Salvar", type: "submit", class: "btn btn-default" %>
+                          <% end %>
+                    </div>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>

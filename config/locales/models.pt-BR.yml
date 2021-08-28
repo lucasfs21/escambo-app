@@ -1,0 +1,10 @@
+'pt-BR':
+  activerecord:
+    models:
+      ad:
+        one: Anúncio
+        other: Anúncios
+    attributes:
+      ad:
+        description_md: Descrição de marcação
+        description_short: Descrição curta

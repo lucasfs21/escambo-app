@@ -1,0 +1,31 @@
+<h1> Meus Anúncios </h1>
+
+<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Imagem</th>
+      <th scope="col">Categoria</th>
+      <th scope="col">Título</th>
+      <th scope="col">Descrição</th>
+      <th scope="col">Preço</th>
+      <th scope="col">Ações</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @ads.each do |ad| %>
+    <tr>
+      <th scope="row"><%= ad.id %></th>
+      <td><%= image_tag ad.picture (:thumb) %></td>
+      <td><%= ad.category.description %></td>
+      <td><%= ad.title %></td>
+      <td><%= truncate(ad.description_short, length: 70) %></td>
+      <td><%= humanized_money_with_symbol ad.price %></td>
+      <td>
+          <%= link_to edit_site_profile_ad_path(ad.id), class: "btn btn-primary btn-sm" do %>
+              <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+          <% end %>
+      </td>
+    </tr>
+    <% end %>
+</table>

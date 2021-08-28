@@ -1,0 +1,56 @@
+<div class="row">
+    <div class="col-lg-6">
+        <% if @admin.errors.any? %>
+          <%= render partial: "layouts/shared_partials/error_notice", locals: {errors_messages: @admin.errors.full_messages} %>
+        <% end %>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <%= form_title %>
+            </div>
+            <div class="panel-body">
+                <div class="row">
+                    <div class="col-lg-6">
+                          <%= form_for([:backoffice, @admin])  do |f| %>
+                              <div class="form-group">
+                                  <label>Nome</label>
+                                  <%= f.text_field :name, class: "form-control", autofocus: "true",
+                                      placeholder: "Nome do administrador" %>
+                              </div>
+                              <div class="form-group">
+                                  <label>E-mail</label>
+                                  <%= f.text_field :email, class: "form-control",
+                                      placeholder: "E-mail do administrador" %>
+                              </div>
+                              <% if policy(@admin).edit? %>
+                                  <div class="form-group">
+                                      <label>Tipo de Acesso</label>
+                                      <%= f.collection_radio_buttons(:role, options_for_roles, :id, :description,
+                                          class: "form-control", placeholder: "Tipo do administrador") do |b| %>
+                                          <div class="radio">
+                                              <%= b.label { b.radio_button + b.text} %>
+                                          </div>
+                                      <% end %>
+                                  </div>
+                              <% end %>
+                              <div class="form-group">
+                                  <label>Senha</label>
+                                  <%= f.password_field :password, class: "form-control",
+                                      placeholder: "Senha" %>
+                              </div>
+                              <div class="form-group">
+                                  <label>Confirmação da Senha</label>
+                                  <%= f.password_field :password_confirmation, class: "form-control",
+                                      placeholder: "Confirmação da senha" %>
+                              </div>
+                              <%= f.submit "Salvar", type: "submit", class: "btn btn-default" %>
+                          <% end %>
+                    </div>
+                </div>
+                <!-- /.row (nested) -->
+            </div>
+            <!-- /.panel-body -->
+        </div>
+        <!-- /.panel -->
+    </div>
+    <!-- /.col-lg-12 -->
+</div>
